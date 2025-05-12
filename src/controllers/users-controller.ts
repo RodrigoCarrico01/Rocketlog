@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response,  } from 'express'
 import { prisma } from '@/database/prisma'
 import { AppError } from '@/utils/AppError'
 import { hash } from 'bcrypt'
@@ -6,7 +6,7 @@ import { z } from 'zod'
 
 class UsersController {
 
-  async create(request: Request, response: Response, next: NextFunction) {
+  async create(request: Request, response: Response) {
     const bodySchema = z.object({
       name: z.string().trim().min(3),
       email: z.string().email(),
@@ -33,7 +33,7 @@ class UsersController {
 
     const { password: _, ...userWithoutPassword} = user
     
-    return response.json(userWithoutPassword)
+    return response.status(201).json(userWithoutPassword)
   }
 }
 
