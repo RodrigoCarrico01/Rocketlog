@@ -18,7 +18,7 @@ function ensureAuthenticated(request: Request, response: Response, next: NextFun
     }
 
     //Bearer kfs9213mfai211
-    const [,token] = authHeader.split("")
+    const [,token] = authHeader.split(" ")
 
     const {role, sub: user_id} = verify(token, authConfig.jwt.secret) as TokenPayLoad
 
